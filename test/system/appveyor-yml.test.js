@@ -46,9 +46,10 @@ describe('.appveyor.yml', function () {
         });
 
         it('should have correct install scripts', function () {
-            expect(appveyorYAML.install[0].ps).to.be('Install-Product node $env:nodejs_version');
-            expect(appveyorYAML.install[1]).to.be('npm cache clean --force');
-            expect(appveyorYAML.install[2]).to.be('appveyor-retry npm install');
+            expect(appveyorYAML.install[0]).to.be('choco install firefox');
+            expect(appveyorYAML.install[1].ps).to.be('Install-Product node $env:nodejs_version');
+            expect(appveyorYAML.install[2]).to.be('npm cache clean --force');
+            expect(appveyorYAML.install[3]).to.be('appveyor-retry npm install');
         });
 
         it('should have the MS build script and deploy must be turned off', function () {

@@ -32,21 +32,21 @@ module.exports = function (config) {
         port: 9876,
 
         // the number of milliseconds to wait for an idle browser to come back up before bailing
-        browserNoActivityTimeout: 20000,
+        browserNoActivityTimeout: 60000,
 
         // enable / disable colors in the output (reporters and logs)
         colors: true,
 
         // level of logging
         // one of: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-        logLevel: config.LOG_WARN,
+        logLevel: config.LOG_DEBUG,
 
         // enable / disable watching file and executing tests whenever any file changes
         autoWatch: false,
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['ChromeHeadless'],
+        browsers: ['FirefoxHeadless'],
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
@@ -60,7 +60,7 @@ module.exports = function (config) {
         // Error: No provider for "framework:browserify"! (Resolving: framework:browserify)
         plugins: [
             'karma-mocha',
-            'karma-chrome-launcher',
+            'karma-firefox-launcher',
             'karma-browserify',
             'karma-mocha-reporter'
         ],
@@ -72,16 +72,6 @@ module.exports = function (config) {
             }
         }
     };
-
-    if (process.env.TRAVIS) { // eslint-disable-line no-process-env
-        configuration.customLaunchers = {
-            chromeTravis: {
-                base: 'ChromeHeadless',
-                flags: ['--no-sandbox']
-            }
-        };
-        configuration.browsers = ['chromeTravis'];
-    }
 
     config.set(configuration);
 };
